@@ -1,0 +1,34 @@
+{
+  "load": 70,
+  "fuels":
+  {
+    "gas(euro/MWh)": 13.4,
+    "kerosine(euro/MWh)": 50.8,
+    "co2(euro/ton)": 20,
+    "wind(%)": 60
+  },
+  "powerplants": [
+    {
+      "name": "windpark1",
+      "type": "windturbine",
+      "efficiency": 1,
+      "pmin": 140,
+      "pmax": 150
+    },
+    {
+      "name": "gasfiredsomewhatsmaller",
+      "type": "gasfired",
+      "efficiency": 0.37,
+      "pmin": 80,
+      "pmax": 210
+    },
+    {
+      "name": "tj1",
+      "type": "turbojet",
+      "efficiency": 0.3,
+      "pmin": 0,
+      "pmax": 16
+    }
+    
+  ]
+}

@@ -70,7 +70,7 @@ class ProductionPlanService:
             it += 1
         
         
-        return [f_powerplant.to_response_json() for f_powerplant in fixed_powerplants]
+        return [f_powerplant.to_response_json() for f_powerplant in fixed_powerplants] if total_prod == load else []
     
     
     

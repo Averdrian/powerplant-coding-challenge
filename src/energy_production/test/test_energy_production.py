@@ -38,5 +38,16 @@ def test_energy_production(client):
     
     assert response.status_code == 200
     assert sorted(response.get_json(), key=lambda x: x["name"]) == sorted(expected_response, key=lambda x: x["name"])
+
+
+def test_energy_production_no_solution(client):
+    payload = load_json("payload4error.json")
     
+    response = client.post(
+        "/productionplan",
+        data = json.dumps(payload),
+        content_type = "application/json"
+    )
+    
+    assert response.status_code == 422
     

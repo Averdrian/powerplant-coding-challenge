@@ -15,4 +15,9 @@ def production_plan():
     
     prod_plan = CalculateProductionPlan(load, fuels, powerplants).execute()
     
-    return make_response(prod_plan, 200)
+    if len(prod_plan) > 0: 
+        response = make_response(prod_plan, 200)
+    else: 
+        response = make_response({'error': "There is no production plan possible with given parameters"}, 422)
+    
+    return response
