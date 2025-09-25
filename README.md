@@ -3,11 +3,14 @@
 
 ## Execute the application with Docker
 
-1. Build Docker image:
+Build and run Docker image:
 
 ```bash
 docker build -t powerplant .
+```
 
+Run docker image:
+```bash
 docker run -p 8888:8888 --name powerplant-app powerplant
 ```
 
