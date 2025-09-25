@@ -21,7 +21,7 @@ class CalculateProductionPlan:
         total_prod = 0.0
         it = 0
         
-        while total_prod < self.load:
+        while total_prod < self.load and it < len(fixed_powerplants):
             pwp = fixed_powerplants[it]
             
             if total_prod + pwp.pmax <= self.load:
@@ -30,18 +30,31 @@ class CalculateProductionPlan:
             #If the power needed is less than the minimum production, we try tu substract from the previous
             # powerplants so we satisfy the demand with the minimun in the new one
             elif total_prod + pwp.pmin > self.load:
+                powerplants_backup = fixed_powerplants.copy()
+                
                 it_search = it - 1
                 target = total_prod + pwp.pmin - self.load
                 finded = False
+                
                 while not finded and it_search >= 0:
                     pwp_search = fixed_powerplants[it_search]
+                    #If we can substract the remaining from the next powerplant we do and finish the iterations
                     if pwp_search.assigned_production - target >= pwp_search.pmin:
                         pwp_search.assigned_production = round(pwp_search.assigned_production - target, 2)
                         total_prod -= target
                         pwp.assigned_production = round(pwp.pmin, 2)
                         finded = True
+                    #If not, we substract all we can and iterate to next powerplant
+                    else:
+                        
+                        total_prod -= (pwp_search.assigned_production - pwp_search.pmin)
+                        target -= (pwp_search.assigned_production - pwp_search.pmin)
+                        pwp_search.assigned_production = round(pwp_search.pmin, 2)
                     it_search -= 1
-                    
+                #If we were not able to substract and equilibrate without overflowing, we assume
+                # this powerplant is not part of the solution and we recover the production calculated before substracting
+                if not finded:
+                    fixed_powerplants = powerplants_backup        
             
             else:
                 pwp.assigned_production = round(self.load - total_prod, 2)
