@@ -17,7 +17,6 @@ class CalculateProductionPlan:
         
         fixed_powerplants = [self._get_fixed_powerplant(powerplant) for powerplant in self.powerplants]
         fixed_powerplants.sort(key= lambda pwp: pwp.euro_mwh)
-        print([pwp.to_json() for pwp in fixed_powerplants])
         
         total_prod = 0.0
         it = 0
@@ -64,14 +63,6 @@ class CalculateProductionPlan:
             self.efficiency = efficiency
             self.assigned_production = 0.0
             
-        def to_json(self):
-            return {
-                "name": self.name,
-                "pmin": round(self.pmin, 2),
-                "pmax": round(self.pmax, 2),
-                "euro_mwh": self.euro_mwh ,
-                "assigned_production": self.assigned_production
-            }
 
         def to_response_json(self) -> dict:
             return {

@@ -15,4 +15,4 @@ def production_plan():
     
     prod_plan = CalculateProductionPlan(load, fuels, powerplants).execute()
     
-    return prod_plan
+    return make_response(prod_plan, 200)
