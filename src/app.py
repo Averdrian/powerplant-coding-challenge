@@ -6,4 +6,4 @@ app = Flask(__name__)
 app.register_blueprint(energy_production_routes)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8888)
+    app.run(host="0.0.0.0", debug=True, port=8888)
