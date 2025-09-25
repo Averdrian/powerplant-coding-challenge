@@ -1,9 +1,9 @@
 # powerplant-coding-challenge
 
 
-## Ejecutar la aplicación con Docker
+## Execute the application with Docker
 
-1. Construir la imagen Docker:
+1. Build Docker image:
 
 ```bash
 docker build -t powerplant .
