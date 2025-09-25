@@ -9,9 +9,11 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY src/ .
+COPY src ./src
+
+COPY example_payloads ./example_payloads
 
 EXPOSE 8888
 
 
-ENTRYPOINT ["python3", "app.py"]
+ENTRYPOINT ["python3", "src/app.py"]
